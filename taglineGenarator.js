@@ -24,15 +24,12 @@ generateTag(tagLines, 3000);
 document
   .getElementById("random-room-btn")
   .addEventListener("click", async function () {
-    console.log("hello world");
     const data = await fetch(`ROOMS.json`);
     const result = await data.json();
     const randomIndex = Math.floor(Math.random() * 10);
     const modalBody = document.getElementById("random-room-info-modal-body");
     const { name, summary, property_type, images, review_scores } =
       result[randomIndex];
-    console.log(name);
-    console.log(result);
     const reviews = document.createElement("ol");
     if (review_scores.scores) {
       reviews.setAttribute("class", "list-group");

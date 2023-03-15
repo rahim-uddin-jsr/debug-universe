@@ -22,10 +22,11 @@ const displayRoomsData = async (rooms) => {
       price,
       _id,
     } = room;
-    roomsContainer.innerHTML += `
- <div class="col">
+    const div = document.createElement("div");
+    div.classList.add("col");
+    div.innerHTML = `
  <div class="card h-100">
-   <img src=${images.picture_Url} class="card-img-top " alt="..." style=" height: 300px;
+   <img src=${images.picture_url} class="card-img-top " alt="..." style=" height: 300px;
    object-fit: fill;">
    <div class="card-body">
      <h5 class="card-title">${name}</h5>
@@ -38,15 +39,14 @@ const displayRoomsData = async (rooms) => {
    <button class="btn btn-info btn-lg"  role="button" onclick='addToCart(${_id})'
                 >Add to cart</button>
  </div>
-</div>
  `;
+    roomsContainer.appendChild(div);
   });
 };
 
 const range = document.getElementById("review-range");
 range.addEventListener("input", (e) => {
   const value = e.target.value;
-  console.log(value);
   document.getElementById("review-count").innerText = value;
   const filteredData = allRooms.filter((r) => r.number_of_reviews >= value);
   displayRoomsData(filteredData);
@@ -57,6 +57,5 @@ document.getElementById("sort-by-price-btn").addEventListener("click", () => {
     (a, b) =>
       parseFloat(a.price.$numberDecimal) - parseFloat(b.price.$numberDecimal)
   );
-  // console.log(allRooms)
   displayRoomsData(allRooms);
 });
