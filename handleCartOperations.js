@@ -65,7 +65,8 @@ displayCartItems();
 
 const deleteItemFromCart = (id) => {
   const cartItems = getItemsFromStorage();
-  const filteredItems = cartItems.filter((item) => item._id == id);
-  localStorage.setItem("savedCart", JSON.stringify(filteredItems));
+  const filteredItems = cartItems.filter((item) => item._id != id);
+  console.log(filteredItems);
+  localStorage.setItem("saved-Cart", JSON.stringify(filteredItems));
   displayCartItems();
 };
